@@ -269,7 +269,7 @@ class Generator(nn.Module):
 
         # Reshape
         reshape1dto2d = conv1dto2d_layer.unsqueeze(2)
-        reshape1dto2d = reshape1dto2d.view(reshape1dto2d.size(0), 256, 20, -1)
+        reshape1dto2d = reshape1dto2d.view(reshape1dto2d.size(0), 256, int(self.flattened_channels / 256), -1)
 
         # UpSampling
         upsample_layer_1 = self.upSample1(reshape1dto2d)
