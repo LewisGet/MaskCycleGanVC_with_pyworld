@@ -183,10 +183,10 @@ class Training:
                 self.logger.end_iter()
 
                 if self.logger.epoch % config.epochs_save == 0:
-                    self.save(self.logger.epoch, self.g_a2b, self.g_a2b_optimizer, None, config.device, "g_a2b")
-                    self.save(self.logger.epoch, self.g_b2a, self.g_b2a_optimizer, None, config.device, "g_b2a")
-                    self.save(self.logger.epoch, self.d_a, self.d_a_optimizer, None, config.device, "d_a")
-                    self.save(self.logger.epoch, self.d_b, self.d_b_optimizer, None, config.device, "d_b")
+                    self.save(self.logger.epoch, self.g_a2b, self.g_a2b_optimizer, None, "g_a2b")
+                    self.save(self.logger.epoch, self.g_b2a, self.g_b2a_optimizer, None, "g_b2a")
+                    self.save(self.logger.epoch, self.d_a, self.d_a_optimizer, None, "d_a")
+                    self.save(self.logger.epoch, self.d_b, self.d_b_optimizer, None, "d_b")
 
             self.logger.end_epoch()
 
@@ -211,7 +211,7 @@ class Training:
 
         file_name = f'{str(epoch).zfill(5)}_{model_name}.pth.tar'
 
-        ckpt_path = os.path.join(self.ckpt_dir, file_name)
+        ckpt_path = os.path.join(config.load_model_path, file_name)
         torch.save(ckpt_dict, ckpt_path)
         print(f"Saved model to {ckpt_path}")
 
