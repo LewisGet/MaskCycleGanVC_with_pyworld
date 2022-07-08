@@ -170,9 +170,11 @@ class Training:
 
                 d_total_loss, d_total_loss_a, d_total_loss_b = self.d_train(real_a, mask_a, real_b, mask_b)
 
-                g_variables = re.compile("g_*loss*")
-                d_variables = re.compile("d_*loss*")
-                all_loss_keys = list(filter(g_variables.match, locals())) + list(filter(d_variables.match, locals()))
+                all_loss_keys = list()
+
+                for r in ["g_*loss*", "g_*loss", "g_loss*", "d_*loss*", "d_*loss", "d_loss*"]:
+                    r = re.compile(r)
+                    all_loss_keys = all_loss_keys + list(filter(r.match, locals()))
 
                 loss_dict = dict()
 
