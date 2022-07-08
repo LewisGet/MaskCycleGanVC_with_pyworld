@@ -1,13 +1,18 @@
 import os
+import torch
+
+name = "debug"
 
 sample_rate = 16000
 n_frames = 64
 frame_period = 5.0
 coded_dim = 128
 mask_len = 25
+torch.cuda.set_device(0)
 device = 'cuda'
 load_epoch = 0
-load_model_path = os.path.join(os.sep, "home", "results", "debug", "ckpts")
+save_dir = os.path.join(os.sep, "home", "results")
+load_model_path = os.path.join(os.sep, "home", "results", name, "ckpts")
 gpu_ids = [0]
 wav_max_size = sample_rate * 60 * 5
 preprocess_max_batch = 100
@@ -26,6 +31,7 @@ conver_save_path = os.path.join(".", "dataset")
 
 test_wav_save = os.path.join(".", "test")
 
+start_epoch = 0
 num_epochs = 10
 logger_step_print = 100
 epochs_save = 1

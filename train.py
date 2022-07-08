@@ -23,11 +23,11 @@ class Training:
         self.d_lr = config.d_lr
         self.input_shape = (config.coded_dim, config.n_frames)
 
-        self.g_a2b = Generator(input_shape=self.input_shape).to(config.device)
-        self.g_b2a = Generator(input_shape=self.input_shape).to(config.device)
+        self.g_a2b = Generator(input_shape=self.input_shape).to(config.device, dtype=torch.float)
+        self.g_b2a = Generator(input_shape=self.input_shape).to(config.device, dtype=torch.float)
 
-        self.d_a = Discriminator(input_shape=self.input_shape).to(config.device)
-        self.d_b = Discriminator(input_shape=self.input_shape).to(config.device)
+        self.d_a = Discriminator(input_shape=self.input_shape).to(config.device, dtype=torch.float)
+        self.d_b = Discriminator(input_shape=self.input_shape).to(config.device, dtype=torch.float)
 
         a2b_params = self.g_a2b.parameters()
         b2a_params = self.g_b2a.parameters()
@@ -41,8 +41,8 @@ class Training:
         self.d_a_optimizer = torch.optim.Adam(d_a_params, lr=self.d_lr, betas=(0.5, 0.999))
         self.d_b_optimizer = torch.optim.Adam(d_b_params, lr=self.d_lr, betas=(0.5, 0.999))
 
-        self.dataset_a = np.load(os.path.join(config.voice_preprocess_dir[0], f"{voice_speaker[0]}_norm_mel_format.npy"))
-        self.dataset_b = np.load(os.path.join(config.voice_preprocess_dir[1], f"{voice_speaker[1]}_norm_mel_format.npy"))
+        self.dataset_a = np.load(os.path.join(config.voice_preprocess_dir[0], f"{config.voice_speaker[0]}_norm_mel_format.npy"))
+        self.dataset_b = np.load(os.path.join(config.voice_preprocess_dir[1], f"{config.voice_speaker[1]}_norm_mel_format.npy"))
 
         self.dataset = MelDataset(datasetA=self.dataset_a, datasetB=self.dataset_b, n_frames=config.n_frames, max_mask_len=config.mask_len)
         self.train_dataloader = torch.utils.data.DataLoader(dataset=self.dataset, batch_size=config.batch_size, shuffle=True, drop_last=False)
@@ -164,7 +164,7 @@ class Training:
             for i, (real_a, mask_a, real_b, mask_b) in enumerate(self.train_dataloader):
                 self.logger.start_iter()
 
-                real_a, mask_a, real_b, mask_b = real_a.to(config.device), mask_a.to(config.device), real_b.to(config.device), mask_b.to(config.device)
+                real_a, mask_a, real_b, mask_b = real_a.to(config.device, dtype=torch.float), mask_a.to(config.device, dtype=torch.float), real_b.to(config.device, dtype=torch.float), mask_b.to(config.device, dtype=torch.float)
 
                 g_total_loss, g_total_a2b_loss, g_total_b2a_loss, g_loss_a2b, g_loss_b2a = self.g_train(real_a, mask_a, real_b, mask_b)
 
