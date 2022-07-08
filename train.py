@@ -57,7 +57,7 @@ class Training:
 
         print("dataset len")
         print(f"a : {len(self.dataset_a)}")
-        print(f"a : {len(self.dataset_b)}")
+        print(f"b : {len(self.dataset_b)}")
 
     def reset_grad(self):
         self.g_a2b_optimizer.zero_grad()
