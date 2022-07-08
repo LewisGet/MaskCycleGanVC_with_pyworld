@@ -109,7 +109,7 @@ class Training:
         g_total_loss = g_total_a2b_loss + g_total_b2a_loss
 
         self.reset_grad()
-        g_total_a2b_loss.backward()
+        g_total_a2b_loss.backward(retain_graph=True)
         g_total_b2a_loss.backward()
         self.g_a2b_optimizer.step()
         self.g_b2a_optimizer.step()
@@ -150,7 +150,7 @@ class Training:
         d_total_loss = d_total_loss_a + d_total_loss_b
 
         self.reset_grad()
-        d_total_loss_a.backward()
+        d_total_loss_a.backward(retain_graph=True)
         d_total_loss_b.backward()
         self.d_a_optimizer.step()
         self.d_b_optimizer.step()
