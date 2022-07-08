@@ -215,16 +215,6 @@ class Training:
         torch.save(ckpt_dict, ckpt_path)
         print(f"Saved model to {ckpt_path}")
 
-        # Remove a checkpoint if more than max_ckpts ckpts saved
-        if self.max_ckpts:
-            self.ckpt_names.append(ckpt_path)
-            if len(self.ckpt_names) > self.max_ckpts:
-                oldest_ckpt = os.path.join(
-                    self.ckpt_dir, self.ckpt_names.pop(0))
-                os.remove(oldest_ckpt)
-                print(
-                    f"Exceeded max number of checkpoints so deleting {oldest_ckpt}")
-
     def load_model(self, model, model_name=None, ckpt_path=None, optimizer=None, scheduler=None):
         ckpt_paths = sorted([name for name in os.listdir(config.load_model_path) if name.split(".", 1)[1] == "pth.tar"])
 
