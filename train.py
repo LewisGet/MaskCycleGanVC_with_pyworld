@@ -172,9 +172,9 @@ class Training:
 
                 all_loss_keys = list()
 
-                for r in ["g_*loss*", "g_*loss", "g_loss*", "d_*loss*", "d_*loss", "d_loss*"]:
+                for r in ["g_*", "d_*"]:
                     r = re.compile(r)
-                    all_loss_keys = all_loss_keys + list(filter(r.match, locals()))
+                    all_loss_keys = all_loss_keys + list(filter(r.match, locals().keys()))
 
                 loss_dict = dict()
 
