@@ -182,11 +182,11 @@ class Training:
                 self.logger.log_iter(loss_dict=loss_dict)
                 self.logger.end_iter()
 
-                if self.logger.epoch % config.epochs_save == 0:
-                    self.save(self.logger.epoch, self.g_a2b, self.g_a2b_optimizer, None, "g_a2b")
-                    self.save(self.logger.epoch, self.g_b2a, self.g_b2a_optimizer, None, "g_b2a")
-                    self.save(self.logger.epoch, self.d_a, self.d_a_optimizer, None, "d_a")
-                    self.save(self.logger.epoch, self.d_b, self.d_b_optimizer, None, "d_b")
+            if self.logger.epoch % config.epochs_save == 0:
+                self.save(self.logger.epoch, self.g_a2b, self.g_a2b_optimizer, None, "g_a2b")
+                self.save(self.logger.epoch, self.g_b2a, self.g_b2a_optimizer, None, "g_b2a")
+                self.save(self.logger.epoch, self.d_a, self.d_a_optimizer, None, "d_a")
+                self.save(self.logger.epoch, self.d_b, self.d_b_optimizer, None, "d_b")
 
             self.logger.end_epoch()
 
