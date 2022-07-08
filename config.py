@@ -4,6 +4,7 @@ sample_rate = 16000
 n_frames = 64
 frame_period = 5.0
 coded_dim = 128
+mask_len = 25
 device = 'cuda'
 load_epoch = 0
 load_model_path = os.path.join(os.sep, "home", "results", "debug", "ckpts")
@@ -24,3 +25,12 @@ pre_conver_types = ["m4a", "mp3", "mp4"]
 conver_save_path = os.path.join(".", "dataset")
 
 test_wav_save = os.path.join(".", "test")
+
+num_epochs = 10
+logger_step_print = 100
+epochs_save = 1
+
+g_lr = 2e-4
+d_lr = 1e-4
+
+batch_size = 1
