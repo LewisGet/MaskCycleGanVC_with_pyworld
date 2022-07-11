@@ -11,7 +11,7 @@ def pack_up(values):
     overflow = list()
 
     for value in values:
-        for index in range(0, value.shape[-1], config.n_frames):
+        for index in range(0, value.shape[-1], config.packup_stride):
             start, end = index, index + config.n_frames
             slice_value = value[:, start:end]
 

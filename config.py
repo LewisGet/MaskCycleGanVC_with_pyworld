@@ -7,6 +7,7 @@ sample_rate = 16000
 n_frames = 64
 frame_period = 5.0
 coded_dim = 128
+packup_stride = 3
 mask_len = 25
 torch.cuda.set_device(0)
 device = 'cuda'
